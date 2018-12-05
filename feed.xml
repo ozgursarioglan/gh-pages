@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Özgür SARIOĞLAN</title>
+    <link href="https://ozgursarioglan.github.io/gh-pages/feed.xml" rel="self" />
+    <link href="https://ozgursarioglan.github.io/gh-pages" />
+    <updated>2018-12-05T19:11:21+03:00</updated>
+    <author>
+        <name>Özgür</name>
+    </author>
+    <id>https://ozgursarioglan.github.io/gh-pages</id>
+
+    <entry>
+        <title>Selam Dünya</title>
+        <author>
+            <name>Özgür</name>
+        </author>
+        <link href="https://ozgursarioglan.github.io/gh-pages/selam-dunya.html"/>
+        <id>https://ozgursarioglan.github.io/gh-pages/selam-dunya.html</id>
+
+        <updated>2018-12-05T19:04:18+03:00</updated>
+            <summary>
+                <![CDATA[
+                        <img src="https://ozgursarioglan.github.io/gh-pages/media/posts/1/" alt="" />
+                    Selam Dünya
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <img src="https://ozgursarioglan.github.io/gh-pages/media/posts/1/" alt="" />
+                Selam Dünya
+            ]]>
+        </content>
+    </entry>
+</feed>
