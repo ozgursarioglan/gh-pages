@@ -6,10 +6,8 @@
             $('.js-navbar__toggle').attr('aria-expanded', $('.js-navbar').hasClass('is-opened'));
             return false;
         });
-
         $('.js-navbar a').each(function(i, link) {
             link = $(link);
-
             link.on('touchend', function(e) {
                 if(
                     link.parent().hasClass('has-submenu') &&
@@ -22,7 +20,7 @@
                 }
 
                 $('.js-navbar li[aria-expanded="true"]').each(function(i, item) {
-                    if(!$.contains(item, link[0])) {
+                    if (!$.contains(item, link[0])) {
                         $(item).attr('aria-expanded', 'false');
                     }
                 });
@@ -31,53 +29,26 @@
     });
 
     // iOS :hover fix
-    document.addEventListener("touchend", function() {});
+    document.addEventListener("touchend", function () {});
 
-    // Sticky menu animation
-    $(function($) {
-        var menu = $('.js-top');
-
-        if(!menu.length) {
-            return;
-        }
-
-        var previousScroll = $(window).scrollTop();
-        var menuHeight = menu.outerHeight();
-        var menuTop = 0;
-        var headerHeight = menu.outerHeight(true);
-
-        $(window).on('scroll', function() {
-            var currentScroll = $(window).scrollTop();
-            var diff = currentScroll - previousScroll;
-            menuTop -= diff;
-
-            if(menuTop < -menuHeight) {
-                menuTop = -menuHeight;
-            }
-
-            if(menuTop >= 0) {
-                menuTop = 0;
-            }
-
-            if(currentScroll <= headerHeight + 50) {
-                menu.removeClass('is-sticky');
-                menu.parent().css('padding-top', "0px");
-                menu.find('.navbar__menu').css('margin-top', 0);
-            } else {
-                menu.addClass('is-sticky');
-                menu.parent().css('padding-top', headerHeight + "px");
-                menu.find('.navbar__menu').css('margin-top', (headerHeight / 2) + "px");
-            }
-
-            if (currentScroll <= 30) {
-                menuTop = 0;
-            }
-
-            menu.css('top', menuTop + 'px');
-
-            previousScroll = currentScroll;
-        });
-    });
+     // Post image class
+     $(function ($) {
+         var contentImages = $('.post__content').find('img');
+         if(contentImages.length) {
+             var cssClasses = ['post__image--full', 'post__image--wide', 'post__image--left', 'post__image--right', 'post__image--center'];
+             contentImages.each(function(i, img) {
+                 img = $(img);
+                 if(img.parent().prop('tagName') === 'P') {
+                     cssClasses.each(function(i, cssClass) {
+                         if(img.hasClass(cssClass) && !img.parent().hasClass(cssClass)) {
+                             img.removeClass(cssClass);
+                             img.parent().addClass(cssClass);
+                         }
+                     });
+                 }
+             });
+         }
+     });
 
     // Mainmenu improvements
     $(function ($) {
@@ -133,6 +104,47 @@
         }
     });
 
+    // Sticky menu animation
+    $(function ($) {
+        var menu = $('.js-top');
+
+        if (!menu.length || !menu.hasClass('is-sticky')) {
+            return;
+        }
+
+        var previousScroll = $(window).scrollTop();
+        var menuHeight = menu.outerHeight();
+        var menuTop = 0;
+
+        $(window).on('scroll', function () {
+            var currentScroll = $(window).scrollTop();
+            var diff = currentScroll - previousScroll;
+            menuTop -= diff / 2;
+
+            if (menuTop < -menuHeight) {
+                menuTop = -menuHeight;
+            }
+
+            if (menuTop >= 0) {
+                menuTop = 0;
+            }
+
+            if (currentScroll <= 100) {
+                menu.removeClass('has-bg');
+            } else {
+                menu.addClass('has-bg');
+            }
+
+            if (currentScroll <= 30) {
+                menuTop = 0;
+            }
+
+            menu.css('top', menuTop + 'px');
+
+            previousScroll = currentScroll;
+        });
+    });
+
     // Share buttons pop-up
     $(function () {
         // link selector and pop-up window size
@@ -168,20 +180,4 @@
             return !!popup;
         }
     });
-
-
-    // Search overlay
-    $(function () {
-        $('.search__btn').click(function () {
-            $('.search__overlay').addClass('expanded');
-            setTimeout(function () {
-                $('.search__input').focus();
-            }, 50);
-        });
-
-        $('.search__close').click(function () {
-            $('.search__overlay').removeClass('expanded');
-        });
-    });
-
 })(jQuery);
